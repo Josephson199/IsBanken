@@ -10,6 +10,15 @@ namespace IsBanken.Buisness.Models
         public int AccountId { get; set; }
         public int CustomerId { get; set; }        
         public List<Transaction> Transactions { get; set; }
-        public decimal Balance { get { return Transactions.Sum(t => t.Amount) + Balance; }  }
+        public decimal Balance {
+            get { return Balance; }
+            set
+            {
+                if (value + Balance < 0)
+                    throw new ArgumentOutOfRangeException("Only positive values are allowed");
+
+                Balance = value;
+            }
+        }
     }
 }
