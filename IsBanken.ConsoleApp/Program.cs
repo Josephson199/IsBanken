@@ -9,7 +9,7 @@ namespace IsBanken.ConsoleApp
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }
