@@ -1,14 +1,83 @@
-﻿using IsBanken.Buisness.Models;
+﻿using IsBanken.Buisness.Interfaces;
+using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace IsBanken.Buisness.Infrastructure
 {
-    public class Bank
-    {
-        public static List<Customer> Customers { get; } = new List<Customer>();
-        public static List<Account> Accounts { get; } = new List<Account>();
-        public static List<Transaction> Transactions { get; } = new List<Transaction>();
+    public class Bank 
+    {        
+        private readonly IFileHandler _fileHandler;
+        private readonly ICustomerHandler _customerHandler;
+        private readonly ITransactionHandler _transactionHandler;
+        private readonly IAccountHandler _accountHandler;
+
+        public Bank(IFileHandler fileHandler, 
+            ICustomerHandler customerHandler, 
+            ITransactionHandler transactionHandler,
+            IAccountHandler accountHandler)
+        {
+            _fileHandler = fileHandler;
+            _customerHandler = customerHandler;
+            _transactionHandler = transactionHandler;
+            _accountHandler = accountHandler;            
+        }           
+
+        public List<string> ReadFile()
+        {
+            return _fileHandler.ReadFile();
+        }
+
+        public void ImportCustomers(List<string> fileLines)
+        {
+            _customerHandler.ImportCustomers(fileLines);
+        }
+
+        public void ImportAccounts(List<string> fileLines)
+        {
+            _accountHandler.ImportAccounts(fileLines);
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return _customerHandler.GetCustomers();
+        }
+
+        public List<Account> GetAccounts()
+        {
+            return _accountHandler.GetAccounts();
+        }
+
+        public Customer GetCustomerInformation(int customerId)
+        {
+            var customer = _customerHandler.GetCustomer(customerId);
+
+            if(customer == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var accounts = _accountHandler.GetAccounts().Where(acc => acc.CustomerId == customerId).ToList();
+
+            customer.Accounts = accounts;
+
+            return customer;
+        }
+
+        public Customer CreateCustomer()
+        {
+            //TODO Create customer 
+            return new Customer();
+        }
+
+        public void CreateAccount(int customerId)
+        {
+            //TODO Create account for customerid with zero balance, unikt kontonummer(ta högsta accountid som finns + 1)
+        }
+
+
     }
+
+
 }

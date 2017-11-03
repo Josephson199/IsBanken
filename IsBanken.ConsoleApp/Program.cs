@@ -1,31 +1,35 @@
 ﻿using IsBanken.Buisness.Infrastructure;
-using IsBanken.Buisness.Models;
 using System;
-using System.Collections.Generic;
 
 namespace IsBanken.ConsoleApp
 {
     class Program
     {
+        private static Bank _bank;
+
         private static void Initialize()
         {
             var fileHandler = new FileHandler();
-            var fileLines = fileHandler.ReadFile();
-
             var customerHandler = new CustomerHandler();
-            customerHandler.CreateCustomers(fileLines);
-
             var accountHandler = new AccountHandler();
-            accountHandler.CreateAccounts(fileLines);
+            var transactionHandler = new TransactionHandler();
+
+            _bank = new Bank(fileHandler, customerHandler, transactionHandler, accountHandler);
+
+            var fileLines = _bank.ReadFile();
+
+            _bank.ImportCustomers(fileLines);
+            _bank.ImportAccounts(fileLines);
 
         }
+
         static void Main(string[] args)
         {
+            Initialize();            
 
-            Initialize();
-
-            Console.WriteLine(Bank.Customers.Count);
-            Console.WriteLine(Bank.Accounts.Count);
+            Console.WriteLine(_bank.GetCustomers().Count);
+            Console.WriteLine(_bank.GetAccounts().Count);
+            
             Console.ReadLine();
         }
 

@@ -1,15 +1,46 @@
-﻿using IsBanken.Buisness.Models;
+﻿using IsBanken.Buisness.Interfaces;
+using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
 
 namespace IsBanken.Buisness.Infrastructure
 {
-    public class CustomerHandler
+    public class CustomerHandler : ICustomerHandler
     {
         private const int CustomerDividerCount = 9;
 
-        public void CreateCustomers(List<string> fileLines)
+        public void CreateCustomer()
         {
+            //create customer and add to context.customer
+            //make sure to create an account in bank class for this customer.
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<int, string> CustomerSearchByNameOrCity(string term)
+        {
+            //search on name or city contains term
+            //return customerid and name.
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCustomer(int customerId)
+        {
+            //Ta bara bort customer om customer inte har några konton.
+            throw new NotImplementedException();
+        }
+
+        public Customer GetCustomer(int CustomerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return Context.Customers;
+        }
+
+        public void ImportCustomers(List<string> fileLines)
+        {            
             foreach (var line in fileLines)
             {
                 if (line == null)
@@ -32,9 +63,9 @@ namespace IsBanken.Buisness.Infrastructure
                         Phonenumber = splittedLine[8],
                     };
 
-                    Bank.Customers.Add(customer);
+                    Context.Customers.Add(customer);
                 }
-            }
+            }            
         }
     }
 }
