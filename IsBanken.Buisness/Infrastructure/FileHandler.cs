@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using IsBanken.Buisness.Interfaces;
+using System.Collections.Generic;
 using System.IO;
+using IsBanken.Buisness.Models;
 
 namespace IsBanken.Buisness.Infrastructure
 {
-    public class FileHandler
+    public class FileHandler : IFileHandler
     {
         public List<string> ReadFile()
         {
@@ -19,6 +21,9 @@ namespace IsBanken.Buisness.Infrastructure
             return fileLines;
         }
 
-      
+        public void SaveFile(List<Account> accounts, List<Customer> customers)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

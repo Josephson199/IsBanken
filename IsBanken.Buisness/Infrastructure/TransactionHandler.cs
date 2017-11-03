@@ -1,18 +1,16 @@
-﻿using IsBanken.Buisness.Models;
-using System;
-using System.Collections.Generic;
+﻿using IsBanken.Buisness.Interfaces;
+using IsBanken.Buisness.Models;
 using System.Linq;
-using System.Text;
 
 namespace IsBanken.Buisness.Infrastructure
 {
-    public class TransactionHandler
+    public class TransactionHandler : ITransactionHandler
     {
         public TransactionResult AddTransaction(int toAccountId, int fromAccountId, decimal amount)
         {
             var transactionResult = new TransactionResult();
             
-            var toAccount = Bank.Accounts.FirstOrDefault(acc => acc.AccountId == toAccountId);
+            var toAccount = Context.Accounts.FirstOrDefault(acc => acc.AccountId == toAccountId);
 
             if (toAccount == null)
             {
@@ -21,7 +19,7 @@ namespace IsBanken.Buisness.Infrastructure
                 return transactionResult;
             }              
 
-            var fromAccount = Bank.Accounts.FirstOrDefault(acc => acc.AccountId == fromAccountId);
+            var fromAccount = Context.Accounts.FirstOrDefault(acc => acc.AccountId == fromAccountId);
 
             if (fromAccount == null)
             {
@@ -47,11 +45,22 @@ namespace IsBanken.Buisness.Infrastructure
                 ToAccount = toAccount
             };
 
-            Bank.Transactions.Add(transaction);
+            Context.Transactions.Add(transaction);
 
             transactionResult.Success = true;
 
             return transactionResult;
+        }
+
+        public TransactionResult Deposit(int accoundId, decimal amount)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public TransactionResult Withdraw(int accountId, decimal amount)
+        {
+            //kan inte ta ut om amount är större än saldot.
+            throw new System.NotImplementedException();
         }
     }
 

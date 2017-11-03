@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IsBanken.Buisness.Models
+﻿namespace IsBanken.Buisness.Models
 {
     public class Transaction
     {

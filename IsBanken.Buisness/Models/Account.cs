@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace IsBanken.Buisness.Models
 {
@@ -10,15 +7,7 @@ namespace IsBanken.Buisness.Models
         public int AccountId { get; set; }
         public int CustomerId { get; set; }        
         public List<Transaction> Transactions { get; set; }
-        public decimal Balance {
-            get { return Balance; }
-            set
-            {
-                if (value + Balance < 0)
-                    throw new ArgumentOutOfRangeException("Only positive values are allowed");
+        public decimal Balance { get; set; }
 
-                Balance = value;
-            }
-        }
     }
 }
