@@ -7,10 +7,12 @@ namespace IsBanken.Buisness.Infrastructure
 {
     public class FileHandler : IFileHandler
     {
+        private readonly string path =
+            @"C:\Users\patricstromberg\source\repos\IsBanken\IsBanken.Buisness\Files\bankdata.txt";
         public List<string> ReadFile()
         {
             var fileLines = new List<string>();
-            using (var sr = new StreamReader(@"C:\Users\josep\source\repos\IsBanken\IsBanken.Buisness\Files\bankdata.txt"))
+            using (var sr = new StreamReader(path))
             {
                 while (sr.ReadLine() != null)
                 {

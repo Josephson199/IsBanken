@@ -2,6 +2,7 @@
 using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace IsBanken.Buisness.Infrastructure
 {
@@ -45,7 +46,7 @@ namespace IsBanken.Buisness.Infrastructure
                     {
                         AccountId = Convert.ToInt32(splittedLine[0]),
                         CustomerId = Convert.ToInt32(splittedLine[1]),
-                        Balance = Convert.ToDecimal(splittedLine[2])
+                        Balance = Convert.ToDecimal(splittedLine[2], CultureInfo.InvariantCulture)
                     };
 
                     Context.Accounts.Add(account);
