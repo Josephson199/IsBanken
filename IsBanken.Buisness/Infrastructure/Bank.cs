@@ -44,9 +44,19 @@ namespace IsBanken.Buisness.Infrastructure
             return _customerHandler.GetCustomers();
         }
 
+        public Customer GetCustomer(int customerId)
+        {
+            return _customerHandler.GetCustomer(customerId);
+        }
+
         public List<Account> GetAccounts()
         {
             return _accountHandler.GetAccounts();
+        }
+
+        public List<Account> GetCustomerAccounts(int customerId)
+        {
+            return _accountHandler.GetCustomerAccounts(customerId);
         }
 
         public Customer GetCustomerInformation(int customerId)

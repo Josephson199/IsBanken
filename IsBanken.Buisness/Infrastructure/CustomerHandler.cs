@@ -2,6 +2,7 @@
 using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IsBanken.Buisness.Infrastructure
 {
@@ -29,9 +30,9 @@ namespace IsBanken.Buisness.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(int CustomerId)
+        public Customer GetCustomer(int customerId)
         {
-            throw new NotImplementedException();
+            return Context.Customers.FirstOrDefault(c => c.CustomerId.Equals(customerId));
         }
 
         public List<Customer> GetCustomers()

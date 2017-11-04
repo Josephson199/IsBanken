@@ -7,7 +7,7 @@ namespace IsBanken.Buisness.Interfaces
     {
         void ImportCustomers(List<string> fileLines);
         List<Customer> GetCustomers();
-        Customer GetCustomer(int CustomerId);
+        Customer GetCustomer(int customerId);
         Dictionary<int, string> CustomerSearchByNameOrCity(string term);
         void CreateCustomer();
         void DeleteCustomer(int customerId);
