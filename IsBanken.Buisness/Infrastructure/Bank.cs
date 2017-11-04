@@ -76,6 +76,11 @@ namespace IsBanken.Buisness.Infrastructure
             //TODO Create account for customerid with zero balance, unikt kontonummer(ta högsta accountid som finns + 1)
         }
 
+        public Dictionary<int, string> CustomerSearch(string term)
+        {
+            return _customerHandler.CustomerSearchByNameOrCity(term);
+        }
+
 
     }
 

@@ -46,7 +46,7 @@ namespace IsBanken.ConsoleApp
                 if (input.ToLower().Trim() == "hjälp")
                 {
                     DisplayMenu();
-                    Console.WriteLine();
+                    Console.Write("> ");
                     continue;
                 }
                 var inputParsedResult = int.TryParse(input, out int result);
@@ -93,8 +93,11 @@ namespace IsBanken.ConsoleApp
                 }
                 else
                 {
-                    Console.WriteLine("Ange ett nummer mellan 0-9");
+                    Console.WriteLine("Ange ett nummer mellan 0-9 eller 'hjälp' för menyn");
                 }
+
+                Console.WriteLine();
+                Console.Write("> ");
             }
 
 
@@ -147,7 +150,24 @@ namespace IsBanken.ConsoleApp
 
         private static void SearchCustomer()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("* Sök kund *");
+            Console.Write("Ange namn eller postort: ");
+
+            var term = Console.ReadLine();
+            var result = _bank.CustomerSearch(term);
+
+            if (result.Count > 0)
+            {
+                foreach (var customer in result)
+                {
+                    Console.WriteLine("Kundnr: {0}, Namn: {1}", customer.Key, customer.Value);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Din sökning gav ingen träff");
+            }
+
         }
 
         static void DisplayMenu()
