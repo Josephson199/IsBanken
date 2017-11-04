@@ -19,9 +19,11 @@ namespace IsBanken.Buisness.Infrastructure
 
         public Dictionary<int, string> CustomerSearchByNameOrCity(string term)
         {
-            //search on name or city contains term
-            //return customerid and name.
-            throw new NotImplementedException();
+            var result = Context.Customers.Where(c => c.CompanyName.Contains(term) || c.City.Contains(term)).ToList();
+
+            var dictionary = result.ToDictionary(c => c.CustomerId, c => c.CompanyName);
+
+            return dictionary;
         }
 
         public void DeleteCustomer(int customerId)
