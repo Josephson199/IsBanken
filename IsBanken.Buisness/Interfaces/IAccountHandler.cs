@@ -7,6 +7,7 @@ namespace IsBanken.Buisness.Interfaces
     {
         void ImportAccounts(List<string> fileLines);
         List<Account> GetAccounts();
+        List<Account> GetCustomerAccounts(int customerId);
         decimal GetTotalAccountBalances();
         void CreateAccount(int customerId);
         void DeleteAccount(int accountId);

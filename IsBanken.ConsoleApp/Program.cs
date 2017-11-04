@@ -145,7 +145,47 @@ namespace IsBanken.ConsoleApp
 
         private static void ShowCustomer()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("* Visa kundbild *");
+            Console.Write("Ange kundnr: ");
+            
+            var input = Console.ReadLine();
+            Console.WriteLine();
+
+            var inputParsedResult = int.TryParse(input, out int customerId);
+            if (inputParsedResult)
+            {
+                var customer = _bank.GetCustomer(customerId);
+                if (customer != null)
+                {
+                    Console.WriteLine($"Kundnr: {customer.CustomerId}");
+                    Console.WriteLine($"Orgnr: {customer.OrganizationId}");
+                    Console.WriteLine($"Namn: {customer.CompanyName}");
+                    Console.WriteLine($"Adress: {customer.SreetAddress}, {customer.ZipCode} {customer.City}, {customer.Country}");
+                    Console.WriteLine();
+
+                    var customerAccounts = _bank.GetCustomerAccounts(customerId);
+                    if (customerAccounts != null)
+                    {
+                        Console.WriteLine("Konton:");
+                        foreach (var customerAccount in customerAccounts)
+                        {
+                            Console.WriteLine($"Kontonr: {customerAccount.AccountId}, Saldo: {customerAccount.Balance}kr");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kunden har inga konton");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Din sökning gav ingen träff");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ange ett kundnr");
+            }
         }
 
         private static void SearchCustomer()
@@ -188,3 +228,4 @@ namespace IsBanken.ConsoleApp
         }
     }
 }
+

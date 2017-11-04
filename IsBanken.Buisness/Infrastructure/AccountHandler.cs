@@ -3,6 +3,7 @@ using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace IsBanken.Buisness.Infrastructure
 {
@@ -24,6 +25,11 @@ namespace IsBanken.Buisness.Infrastructure
         public List<Account> GetAccounts()
         {
             return Context.Accounts;
+        }
+
+        public List<Account> GetCustomerAccounts(int customerId)
+        {
+            return Context.Accounts.Where(a => a.CustomerId.Equals(customerId)).ToList();
         }
 
         public decimal GetTotalAccountBalances()
