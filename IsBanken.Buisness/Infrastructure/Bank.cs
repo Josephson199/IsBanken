@@ -91,7 +91,10 @@ namespace IsBanken.Buisness.Infrastructure
             return _customerHandler.CustomerSearchByNameOrCity(term);
         }
 
-
+        public void SaveFile(List<Customer> customers, List<Account> accounts)
+        {
+            _fileHandler.SaveFile(accounts, customers);
+        }
     }
 
 

@@ -41,6 +41,31 @@ namespace IsBanken.Buisness.Infrastructure
         public void SaveFile(List<Account> accounts, List<Customer> customers)
         {
             var savePath = $"{_bankDataStorageFolder}{DateTime.Now.ToString(_dateFormat, CultureInfo.GetCultureInfo("sv-SE"))}.txt";
+
+            using(var sw = new StreamWriter(savePath))
+            {
+                sw.WriteLine($"{customers.Count}");
+                foreach (var customer in customers)
+                {
+                    sw.WriteLine($"{customer.CustomerId};" +
+                                $"{customer.OrganizationId};" +
+                                $"{customer.CompanyName};" +
+                                $"{customer.SreetAddress};" +
+                                $"{customer.City};" +
+                                $"{customer.Region};" +
+                                $"{customer.ZipCode};" +
+                                $"{customer.Country};"+
+                                $"{customer.Phonenumber}");
+                }
+
+                sw.WriteLine($"{accounts.Count}");
+                foreach (var account in accounts)
+                {
+                    sw.WriteLine($"{account.AccountId};" +
+                               $"{account.CustomerId};" +
+                               $"{account.Balance}");                             
+                }
+            }
         }
     }
 }
