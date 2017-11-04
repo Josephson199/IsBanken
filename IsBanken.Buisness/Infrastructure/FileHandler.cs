@@ -29,9 +29,10 @@ namespace IsBanken.Buisness.Infrastructure
             var fileLines = new List<string>();
             using (var sr = new StreamReader(_bankDataStorageFolder + _path))
             {
-                while (sr.ReadLine() != null)
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    fileLines.Add(sr.ReadLine());
+                    fileLines.Add(line);
                 }
             }
 
