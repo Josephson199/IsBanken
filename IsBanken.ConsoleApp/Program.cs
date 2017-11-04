@@ -105,7 +105,7 @@ namespace IsBanken.ConsoleApp
 
         private static void SaveFile()
         {
-            throw new NotImplementedException();
+            _bank.SaveFile(_bank.GetCustomers(), _bank.GetAccounts());
         }
 
         private static void AddTransaction()
