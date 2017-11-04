@@ -42,7 +42,6 @@ namespace IsBanken.Buisness.Infrastructure
         {
             var savePath = $"{_bankDataStorageFolder}{DateTime.Now.ToString(_dateFormat, CultureInfo.GetCultureInfo("sv-SE"))}.txt";
 
-
             using(var sw = new StreamWriter(savePath))
             {
                 sw.WriteLine($"{customers.Count}");
