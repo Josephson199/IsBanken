@@ -64,7 +64,7 @@ namespace IsBanken.Buisness.Infrastructure
                 {
                     sw.WriteLine($"{account.AccountId};" +
                                $"{account.CustomerId};" +
-                               $"{account.Balance}");                             
+                               $"{account.Balance.ToString(CultureInfo.InvariantCulture)}");                             
                 }
             }
         }
