@@ -8,7 +8,7 @@ namespace IsBanken.Buisness.Interfaces
         void ImportAccounts(List<string> fileLines);
         List<Account> GetAccounts();
         List<Account> GetCustomerAccounts(int customerId);
-        decimal GetTotalAccountBalances();
+        decimal GetTotalAccountBalances(int? customerId);
         void CreateAccount(int customerId);
         void DeleteAccount(int accountId);
     }

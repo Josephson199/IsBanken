@@ -95,6 +95,11 @@ namespace IsBanken.Buisness.Infrastructure
         {
             _fileHandler.SaveFile(accounts, customers);
         }
+
+        public decimal GetTotalAccountBalances(int? cusomerId)
+        {
+            return _accountHandler.GetTotalAccountBalances(cusomerId);
+        }
     }
 
 
