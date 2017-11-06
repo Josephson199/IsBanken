@@ -32,9 +32,21 @@ namespace IsBanken.Buisness.Infrastructure
             return Context.Accounts.Where(a => a.CustomerId.Equals(customerId)).ToList();
         }
 
-        public decimal GetTotalAccountBalances()
+        public decimal GetTotalAccountBalances(int? customerId)
         {
-            throw new NotImplementedException();
+            decimal totalBalance = 0;
+
+            if (customerId.HasValue)
+            {
+                var customerAccounts = Context.Accounts.Where(a => a.CustomerId.Equals(customerId));
+                totalBalance += customerAccounts.Sum(customerAccount => customerAccount.Balance);
+
+                return totalBalance;
+            }
+
+            totalBalance = Context.Accounts.Sum(a => a.Balance);
+
+            return totalBalance;
         }
 
         public void ImportAccounts(List<string> fileLines)

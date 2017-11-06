@@ -1,6 +1,5 @@
 ﻿using IsBanken.Buisness.Infrastructure;
 using System;
-using System.Globalization;
 
 namespace IsBanken.ConsoleApp
 {
@@ -28,12 +27,10 @@ namespace IsBanken.ConsoleApp
         {
             Initialize();
 
-
             Console.WriteLine("\n>>>>>>>>>>Välkommen till IsBanken<<<<<<<<<<\n\n");
-            Console.WriteLine("Antal kunder: " + _bank.GetCustomers().Count);
-            Console.WriteLine("Antal konton: " + _bank.GetAccounts().Count);
-            //todo saldo
-            Console.WriteLine("Totalt saldo:");
+            Console.WriteLine("Antal kunder: " + _bank.GetCustomers().Count + "st");
+            Console.WriteLine("Antal konton: " + _bank.GetAccounts().Count + "st");
+            Console.WriteLine("Totalt saldo: " + _bank.GetTotalAccountBalances(null) + "kr");
             Console.WriteLine();
             Console.WriteLine();
 
@@ -89,7 +86,6 @@ namespace IsBanken.ConsoleApp
                             Console.WriteLine();
                             break;
                     }
-
                 }
                 else
                 {
@@ -99,12 +95,15 @@ namespace IsBanken.ConsoleApp
                 Console.WriteLine();
                 Console.Write("> ");
             }
-
-
         }
 
         private static void SaveFile()
         {
+            Console.WriteLine("* Avsluta och spara *");
+            Console.WriteLine("Antal kunder: " + _bank.GetCustomers().Count + "st");
+            Console.WriteLine("Antal konton: " + _bank.GetAccounts().Count + "st");
+            Console.WriteLine("Totalt saldo: " + _bank.GetTotalAccountBalances(null) + "kr");
+            Console.ReadLine();
             _bank.SaveFile(_bank.GetCustomers(), _bank.GetAccounts());
         }
 
@@ -147,7 +146,7 @@ namespace IsBanken.ConsoleApp
         {
             Console.WriteLine("* Visa kundbild *");
             Console.Write("Ange kundnr: ");
-            
+
             var input = Console.ReadLine();
             Console.WriteLine();
 
@@ -168,12 +167,11 @@ namespace IsBanken.ConsoleApp
                     if (customerAccounts != null)
                     {
                         Console.WriteLine("Konton:");
-                        decimal totalBalance = 0;
                         foreach (var customerAccount in customerAccounts)
                         {
                             Console.WriteLine($"Kontonr: {customerAccount.AccountId}, Saldo: {customerAccount.Balance}kr");
-                            totalBalance += customerAccount.Balance;
                         }
+                        var totalBalance = _bank.GetTotalAccountBalances(customerId);
                         Console.WriteLine($"Totalt saldo: {totalBalance}kr");
 
                     }
