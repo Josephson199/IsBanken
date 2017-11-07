@@ -10,6 +10,6 @@ namespace IsBanken.Buisness.Interfaces
         Customer GetCustomer(int customerId);
         Dictionary<int, string> CustomerSearchByNameOrCity(string term);
         Customer CreateCustomer(Customer customer);
-        void DeleteCustomer(int customerId);
+        bool DeleteCustomer(int customerId);
     }
 }

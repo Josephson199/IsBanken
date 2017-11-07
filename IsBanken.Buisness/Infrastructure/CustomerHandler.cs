@@ -44,10 +44,16 @@ namespace IsBanken.Buisness.Infrastructure
             return dictionary;
         }
 
-        public void DeleteCustomer(int customerId)
+        public bool DeleteCustomer(int customerId)
         {
-            //Ta bara bort customer om customer inte har några konton.
-            throw new NotImplementedException();
+            var customerAccounts = Context.Accounts.Where(c => c.CustomerId.Equals(customerId)).ToList();
+
+            if (customerAccounts.Count != 0) return false;
+
+            var customer = Context.Customers.FirstOrDefault(c => c.CustomerId.Equals(customerId));
+            Context.Customers.Remove(customer);
+
+            return true;
         }
 
         public Customer GetCustomer(int customerId)
