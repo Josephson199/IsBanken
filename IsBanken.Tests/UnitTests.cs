@@ -40,6 +40,33 @@ namespace IsBanken.Tests
             Assert.Equal(1, customer.CustomerId);
         }
 
+        [Fact]
+        public void Test_search_customer_by_name_or_city()
+        {
+            var searchterm = "Ice";
+            var customer = _bank.CustomerSearch(searchterm);
+
+            Assert.Equal(1, customer.Count);
+        }
+
+        [Fact]
+        public void Test_show_customer_by_customerId()
+        {
+            var customer = _bank.GetCustomer(1);
+            var cusomerAccount = _bank.GetCustomerAccounts(1);
+
+            Assert.Equal("Ice inc.", customer.CompanyName);
+            Assert.Equal(2, cusomerAccount.Count);
+        }
+
+        [Fact]
+        public void Test_get_total_account_balances()
+        {
+            var total = _bank.GetTotalAccountBalances(null);
+
+            Assert.Equal(1997817, total);
+        }
+
 
         private void Seed()
         {
