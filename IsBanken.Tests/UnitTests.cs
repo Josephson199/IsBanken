@@ -3,6 +3,7 @@ using IsBanken.Buisness.Interfaces;
 using IsBanken.Buisness.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace IsBanken.Tests
@@ -20,6 +21,38 @@ namespace IsBanken.Tests
 
             _bank = new Bank(new FakeFileHandler(), customerHandler, transactionHandler, accountHandler);
             Seed();
+        }
+
+        [Fact]
+        public void Test_CreateAccount()
+        {
+            _bank.CreateAccount(1);
+
+            var accounts = _bank.GetAccounts();
+
+            Assert.Equal(7, accounts.Count);
+            Assert.Equal(0, accounts.FirstOrDefault(x => x.AccountId == 7).Balance);
+        }
+
+        [Fact]
+        public void Test_CreateCustomer()
+        {
+            var customer = new Customer()
+            {
+                City = "Stockholm",
+                CompanyName = "Ice inc.",
+                Country = "Ice",
+                OrganizationId = "0101-121-211",
+                Phonenumber = "2221212",
+                SreetAddress = "Vägen 1",
+                ZipCode = "122112"
+            };
+
+           var createdCustomer = _bank.CreateCustomer(customer);
+           var customerFromContext = _bank.GetCustomer(createdCustomer.CustomerId);
+
+            Assert.Same(createdCustomer, customerFromContext);
+            Assert.Equal(4, _bank.GetCustomers().Count);
         }
        
 
