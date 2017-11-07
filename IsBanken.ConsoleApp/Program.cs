@@ -141,7 +141,10 @@ namespace IsBanken.ConsoleApp
 
                 if (parsedSucced)
                 {
-                    break;
+                    if (_bank.GetCustomer(customerId) != null)
+                    {
+                        break;
+                    }
                 }
             }
 
