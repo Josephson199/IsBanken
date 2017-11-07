@@ -9,7 +9,7 @@ namespace IsBanken.Buisness.Interfaces
         List<Customer> GetCustomers();
         Customer GetCustomer(int customerId);
         Dictionary<int, string> CustomerSearchByNameOrCity(string term);
-        void CreateCustomer();
+        Customer CreateCustomer(Customer customer);
         void DeleteCustomer(int customerId);
     }
 }

@@ -10,11 +10,29 @@ namespace IsBanken.Buisness.Infrastructure
     {
         private const int CustomerDividerCount = 9;
 
-        public void CreateCustomer()
+        public Customer CreateCustomer(Customer customer)
         {
             //create customer and add to context.customer
             //make sure to create an account in bank class for this customer.
-            throw new NotImplementedException();
+            var customerWithHighestId = Context.Customers.OrderBy(x => x.CustomerId).LastOrDefault();
+
+            int customerId;
+
+            if (customerWithHighestId == null)
+            {
+                customerId = 1;
+            }
+            else
+            {
+                customerId = customerWithHighestId.CustomerId + 1;
+            }
+
+            customer.CustomerId = customerId;
+
+
+            Context.Customers.Add(customer);
+
+            return customer;
         }
 
         public Dictionary<int, string> CustomerSearchByNameOrCity(string term)

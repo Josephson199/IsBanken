@@ -13,7 +13,29 @@ namespace IsBanken.Buisness.Infrastructure
 
         public void CreateAccount(int customerId)
         {
-            throw new NotImplementedException();
+
+            var accountWithHighestId = Context.Accounts.OrderBy(x => x.AccountId).LastOrDefault();
+
+            int accountId;
+
+            if (accountWithHighestId == null)
+            {
+                accountId = 1;
+            }
+            else
+            {
+                accountId = accountWithHighestId.AccountId + 1;
+            }
+
+            var account = new Account()
+            {
+                AccountId = accountId,
+                CustomerId = customerId,
+                Balance = 0
+            };
+
+
+            Context.Accounts.Add(account);
         }
 
         public void DeleteAccount(int accountId)
