@@ -1,5 +1,6 @@
 ﻿using IsBanken.Buisness.Infrastructure;
 using System;
+using IsBanken.Buisness.Models;
 
 namespace IsBanken.ConsoleApp
 {
@@ -129,6 +130,8 @@ namespace IsBanken.ConsoleApp
 
         private static void CreateAccount()
         {
+
+
             throw new NotImplementedException();
         }
 
@@ -139,8 +142,93 @@ namespace IsBanken.ConsoleApp
 
         private static void CreateCustomer()
         {
-            throw new NotImplementedException();
+            string inputName;
+            while (true)
+            {
+                Console.WriteLine("Ange namn:");
+                inputName = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(inputName))
+                {
+                    break;
+                }
+            }
+
+            //kundnummer, namn, organisationsnummer, adress, postnummer och postort
+
+            string inputAddress;
+            while (true)
+            {
+                Console.WriteLine("Ange adress:");
+                inputAddress = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(inputAddress))
+                {
+                    break;
+                }
+            }
+
+            string inputZipCode;
+            while (true)
+            {
+                Console.WriteLine("Ange postnummer:");
+                inputZipCode = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(inputZipCode))
+                {
+                    break;
+                }
+            }
+
+            string inputCity;
+            while (true)
+            {
+                Console.WriteLine("Ange postort:");
+                inputCity = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(inputCity))
+                {
+                    break;
+                }
+            }
+
+            Console.WriteLine("Ange telefonnummer:");
+            var inputPhone = Console.ReadLine().Trim();
+
+            Console.WriteLine("Ange land:");
+            var inputCountry = Console.ReadLine().Trim();
+
+            string inputOrgNumber;
+            while (true)
+            {
+                Console.WriteLine("Ange organisationsnummer:");
+                inputOrgNumber = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(inputOrgNumber))
+                {
+                    break;
+                }
+
+            }
+
+            var customer = new Customer()
+            {
+                CompanyName = inputName,
+                SreetAddress = inputAddress,
+                ZipCode = inputZipCode,
+                City = inputCity,
+                Phonenumber = inputPhone,
+                Country = inputCountry,
+                OrganizationId = inputOrgNumber
+            };
+
+            var createdCustomer = _bank.CreateCustomer(customer);
+
+            _bank.CreateAccount(createdCustomer.CustomerId);
+
+            Console.WriteLine("Kund skapad" + " " + createdCustomer.CompanyName);
         }
+
+
 
         private static void ShowCustomer()
         {

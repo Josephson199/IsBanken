@@ -75,15 +75,19 @@ namespace IsBanken.Buisness.Infrastructure
             return customer;
         }
 
-        public Customer CreateCustomer()
+        public Customer CreateCustomer(Customer customer)
         {
-            //TODO Create customer 
-            return new Customer();
+            var createdCustomer = _customerHandler.CreateCustomer(customer);
+
+            return createdCustomer;
+
         }
 
         public void CreateAccount(int customerId)
         {
             //TODO Create account for customerid with zero balance, unikt kontonummer(ta högsta accountid som finns + 1)
+
+            _accountHandler.CreateAccount(customerId);
         }
 
         public Dictionary<int, string> CustomerSearch(string term)
