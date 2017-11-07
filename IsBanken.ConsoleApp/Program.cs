@@ -131,8 +131,24 @@ namespace IsBanken.ConsoleApp
         private static void CreateAccount()
         {
 
+            int customerId;
 
-            throw new NotImplementedException();
+            while (true)
+            {
+                Console.WriteLine("Ange kundnummer: ");
+
+                var parsedSucced = int.TryParse(Console.ReadLine(), out customerId);
+
+                if (parsedSucced)
+                {
+                    break;
+                }
+            }
+
+            _bank.CreateAccount(customerId);
+
+            Console.WriteLine("Konto skapat");
+
         }
 
         private static void DeleteCustomer()
@@ -152,8 +168,6 @@ namespace IsBanken.ConsoleApp
                     break;
                 }
             }
-
-            //kundnummer, namn, organisationsnummer, adress, postnummer och postort
 
             string inputAddress;
             while (true)
@@ -227,8 +241,6 @@ namespace IsBanken.ConsoleApp
 
             Console.WriteLine("Kund skapad" + " " + createdCustomer.CompanyName);
         }
-
-
 
         private static void ShowCustomer()
         {

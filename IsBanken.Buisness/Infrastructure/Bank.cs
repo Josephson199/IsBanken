@@ -85,7 +85,7 @@ namespace IsBanken.Buisness.Infrastructure
 
         public void CreateAccount(int customerId)
         {
-            //TODO Create account for customerid with zero balance, unikt kontonummer(ta högsta accountid som finns + 1)
+            
 
             _accountHandler.CreateAccount(customerId);
         }
