@@ -1,7 +1,6 @@
 ﻿using IsBanken.Buisness.Interfaces;
 using IsBanken.Buisness.Models;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace IsBanken.Buisness.Infrastructure
 {

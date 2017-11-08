@@ -205,9 +205,9 @@ namespace IsBanken.ConsoleApp
                 }
             }
 
-            var withdraw = _bank.Deposit(accountId, amount);
+            var withdrawResult = _bank.Deposit(accountId, amount);
 
-            Console.WriteLine(withdraw.Success ? "Uttag genomförd!" : withdraw.ErrorMessage);
+            Console.WriteLine(withdrawResult.Success ? "Uttag genomförd!" : withdrawResult.ErrorMessage);
         }
 
         private static void Deposit()
@@ -247,15 +247,15 @@ namespace IsBanken.ConsoleApp
                 }
             }
 
-            var deposit = _bank.Deposit(accountId, amount);
+            var depositResult = _bank.Deposit(accountId, amount);
 
-            if (deposit.Success)
+            if (depositResult.Success)
             {
                 Console.WriteLine("Insättning genomförd!");
             }
             else
             {
-                Console.WriteLine(deposit.ErrorMessage);
+                Console.WriteLine(depositResult.ErrorMessage);
             }
         }
 
