@@ -1,5 +1,6 @@
 ﻿using IsBanken.Buisness.Infrastructure;
 using System;
+using System.Linq;
 using IsBanken.Buisness.Models;
 
 namespace IsBanken.ConsoleApp
@@ -110,17 +111,152 @@ namespace IsBanken.ConsoleApp
 
         private static void AddTransaction()
         {
-            throw new NotImplementedException();
+            int fromAccountId;
+
+            while (true)
+            {
+                Console.WriteLine("Ange från kontonummer: ");
+                var inputFromAccountId = Console.ReadLine();
+
+                var parsedSucced = int.TryParse(inputFromAccountId, out fromAccountId);
+
+                if (parsedSucced)
+                {
+                    if (_bank.GetAccounts().FirstOrDefault(x => x.AccountId == fromAccountId) != null)
+                    {
+                        break;
+                    }
+                    
+                }
+            }
+
+            int toAccountId;
+
+            while (true)
+            {
+                Console.WriteLine("Ange till kontonummer: ");
+                var inputToAccountId = Console.ReadLine();
+
+                var parsedSucced = int.TryParse(inputToAccountId, out toAccountId);
+
+                if (parsedSucced)
+                {
+                    if (_bank.GetAccounts().FirstOrDefault(x => x.AccountId == toAccountId) != null)
+                    {
+                        break;
+                    }
+
+                }
+            }
+
+            decimal amount;
+
+            while (true)
+            {
+                Console.WriteLine("Ange belopp: ");
+                var inputAmount = Console.ReadLine();
+
+                var parsedSucced = decimal.TryParse(inputAmount, out amount);
+
+                if (parsedSucced)
+                {
+                    break;
+                }
+            }
+
+            var result = _bank.AddTransaction(fromAccountId, toAccountId, amount);
+
+            Console.WriteLine(result.Success ? "Transaktion genomförd!" : result.ErrorMessage);
         }
 
         private static void Withdraw()
         {
-            throw new NotImplementedException();
+            int accountId;
+
+            while (true)
+            {
+                Console.WriteLine("Ange kontonummer: ");
+                var accountInput = Console.ReadLine();
+
+                var parsedSucced = int.TryParse(accountInput, out accountId);
+
+                if (parsedSucced)
+                {
+                    if (_bank.GetAccounts().FirstOrDefault(x => x.AccountId == accountId) != null)
+                    {
+                        break;
+                    }
+
+                }
+            }
+
+            decimal amount;
+
+            while (true)
+            {
+                Console.WriteLine("Ange belopp: ");
+                var amountInput = Console.ReadLine();
+
+                var parsedSucced = decimal.TryParse(amountInput, out amount);
+
+                if (parsedSucced)
+                {
+                    break;
+                }
+            }
+
+            var withdraw = _bank.Deposit(accountId, amount);
+
+            Console.WriteLine(withdraw.Success ? "Uttag genomförd!" : withdraw.ErrorMessage);
         }
 
         private static void Deposit()
         {
-            throw new NotImplementedException();
+
+            int accountId;
+
+            while (true)
+            {
+                Console.WriteLine("Ange kontonummer: ");
+                var accountInput = Console.ReadLine();
+
+                var parsedSucced = int.TryParse(accountInput, out accountId);
+
+                if (parsedSucced)
+                {
+                    if (_bank.GetAccounts().FirstOrDefault(x => x.AccountId == accountId) != null)
+                    {
+                        break;
+                    }
+                   
+                }
+            }
+
+            decimal amount;
+
+            while (true)
+            {
+                Console.WriteLine("Ange belopp: ");
+                var amountInput = Console.ReadLine();
+
+                var parsedSucced = decimal.TryParse(amountInput, out amount);
+
+                if (parsedSucced)
+                {
+                    break;
+                }
+            }
+
+            var deposit = _bank.Deposit(accountId, amount);
+
+            if (deposit.Success)
+            {
+                Console.WriteLine("Insättning genomförd!");
+            }
+            else
+            {
+                Console.WriteLine(deposit.ErrorMessage);
+            }
         }
 
         private static void DeleteAccount()

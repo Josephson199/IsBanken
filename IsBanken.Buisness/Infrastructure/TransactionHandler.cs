@@ -1,6 +1,7 @@
 ﻿using IsBanken.Buisness.Interfaces;
 using IsBanken.Buisness.Models;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace IsBanken.Buisness.Infrastructure
 {
@@ -54,13 +55,42 @@ namespace IsBanken.Buisness.Infrastructure
 
         public TransactionResult Deposit(int accoundId, decimal amount)
         {
-            throw new System.NotImplementedException();
+            var transactionResult = new TransactionResult();
+
+            var toAccount = Context.Accounts.FirstOrDefault(acc => acc.AccountId == accoundId);
+
+            if (toAccount == null)
+            {
+                transactionResult.Success = false;
+                transactionResult.ErrorMessage = $"ToAccount did not exist. AccountId: {accoundId}";
+                return transactionResult;
+            }
+
+            toAccount.Balance += amount;
+            transactionResult.Success = true;
+
+            return transactionResult;
         }
 
         public TransactionResult Withdraw(int accountId, decimal amount)
         {
-            //kan inte ta ut om amount är större än saldot.
-            throw new System.NotImplementedException();
+            var transactionResult = new TransactionResult();
+
+            var toAccount = Context.Accounts.FirstOrDefault(acc => acc.AccountId == accountId);
+
+            if (toAccount == null)
+            {
+                transactionResult.Success = false;
+                transactionResult.ErrorMessage = $"ToAccount did not exist. AccountId: {accountId}";
+                return transactionResult;
+            }
+
+            toAccount.Balance -= amount;
+            transactionResult.Success = true;
+
+            return transactionResult;
+        }
+
         }
     }
 
@@ -69,4 +99,4 @@ namespace IsBanken.Buisness.Infrastructure
         public bool Success { get; set; }
         public string ErrorMessage { get; set; }
     }
-}
+
