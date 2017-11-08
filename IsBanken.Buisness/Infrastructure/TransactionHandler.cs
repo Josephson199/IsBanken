@@ -15,7 +15,7 @@ namespace IsBanken.Buisness.Infrastructure
             if (toAccount == null)
             {
                 transactionResult.Success = false;
-                transactionResult.ErrorMessage = $"ToAccount did not exist. AccountId: {toAccountId}";
+                transactionResult.ErrorMessage = $"Till konto existerade ej. Kontonummer: {toAccountId}";
                 return transactionResult;
             }              
 
@@ -24,14 +24,14 @@ namespace IsBanken.Buisness.Infrastructure
             if (fromAccount == null)
             {
                 transactionResult.Success = false;
-                transactionResult.ErrorMessage = $"FromAccount did not exist. AccountId: {fromAccountId}";
+                transactionResult.ErrorMessage = $"Från konto existerade ej. Kontonummer: {fromAccountId}";
                 return transactionResult;
             }               
 
             if (fromAccount.Balance < amount)
             {
                 transactionResult.Success = false;
-                transactionResult.ErrorMessage = $"FromAccount balance is beneath the limit. AccountId: {fromAccountId}";
+                transactionResult.ErrorMessage = $"Summan överstrider saldot. Kontonummer: {fromAccountId}, nuvarande saldo: {fromAccount.Balance}";
                 return transactionResult;
             }               
 
@@ -61,7 +61,7 @@ namespace IsBanken.Buisness.Infrastructure
             if (toAccount == null)
             {
                 transactionResult.Success = false;
-                transactionResult.ErrorMessage = $"ToAccount did not exist. AccountId: {accoundId}";
+                transactionResult.ErrorMessage = $"Till konto existerade inte. Kontonummer: {accoundId}";
                 return transactionResult;
             }
 
@@ -80,7 +80,7 @@ namespace IsBanken.Buisness.Infrastructure
             if (toAccount == null)
             {
                 transactionResult.Success = false;
-                transactionResult.ErrorMessage = $"ToAccount did not exist. AccountId: {accountId}";
+                transactionResult.ErrorMessage = $"Från konto existerade inte. Kontonummer: {accountId}";
                 return transactionResult;
             }
 

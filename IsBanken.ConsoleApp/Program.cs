@@ -101,16 +101,26 @@ namespace IsBanken.ConsoleApp
 
         private static void SaveFile()
         {
-            Console.WriteLine("* Avsluta och spara *");
+            Console.WriteLine("* Sparar.. *");
+            Console.WriteLine();
+
+            _bank.SaveFile(_bank.GetCustomers(), _bank.GetAccounts());
+
+            Console.WriteLine();
+
             Console.WriteLine("Antal kunder: " + _bank.GetCustomers().Count + "st");
             Console.WriteLine("Antal konton: " + _bank.GetAccounts().Count + "st");
             Console.WriteLine("Totalt saldo: " + _bank.GetTotalAccountBalances(null) + "kr");
+
+            Console.WriteLine();
+            
+            Console.WriteLine("Klicka på valfri knapp för att avsluta.");
             Console.ReadLine();
-            _bank.SaveFile(_bank.GetCustomers(), _bank.GetAccounts());
         }
 
         private static void AddTransaction()
         {
+            Console.WriteLine("* Lägg till en transaktion *");
             int fromAccountId;
 
             while (true)
@@ -171,6 +181,7 @@ namespace IsBanken.ConsoleApp
 
         private static void Withdraw()
         {
+            Console.WriteLine("* Uttag *");
             int accountId;
 
             while (true)
@@ -212,7 +223,7 @@ namespace IsBanken.ConsoleApp
 
         private static void Deposit()
         {
-
+            Console.WriteLine("* Insättning *");
             int accountId;
 
             while (true)
@@ -282,7 +293,7 @@ namespace IsBanken.ConsoleApp
 
         private static void CreateAccount()
         {
-
+            Console.WriteLine("* Skapa Konto *");
             int customerId;
 
             while (true)
@@ -329,6 +340,7 @@ namespace IsBanken.ConsoleApp
 
         private static void CreateCustomer()
         {
+            Console.WriteLine("* Skapa kund *");
             string inputName;
             while (true)
             {
@@ -458,7 +470,7 @@ namespace IsBanken.ConsoleApp
             }
             else
             {
-                Console.WriteLine("Ange ett kundnr");
+                Console.WriteLine("Ange ett korrekt kundnummer");
             }
         }
 
