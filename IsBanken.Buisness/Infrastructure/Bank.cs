@@ -104,6 +104,16 @@ namespace IsBanken.Buisness.Infrastructure
         {
             return _accountHandler.GetTotalAccountBalances(cusomerId);
         }
+
+        public bool DeleteCustomer(int customerId)
+        {
+            return _customerHandler.DeleteCustomer(customerId);
+        }
+
+        public bool DeleteCustomerAccount(int accountId)
+        {
+            return _accountHandler.DeleteAccount(accountId);
+        }
     }
 
 

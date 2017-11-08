@@ -38,11 +38,16 @@ namespace IsBanken.Buisness.Infrastructure
             Context.Accounts.Add(account);
         }
 
-        public void DeleteAccount(int accountId)
+        public bool DeleteAccount(int accountId)
         {
-            //ta bara bort konto om det inte finns några pengar
-            throw new NotImplementedException();
+            var account = Context.Accounts.FirstOrDefault(a => a.AccountId.Equals(accountId));
+
+            if (account == null || account.Balance != 0) return false;
+
+            Context.Accounts.Remove(account);
+            return true;
         }
+
 
         public List<Account> GetAccounts()
         {

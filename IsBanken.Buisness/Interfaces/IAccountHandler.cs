@@ -10,6 +10,6 @@ namespace IsBanken.Buisness.Interfaces
         List<Account> GetCustomerAccounts(int customerId);
         decimal GetTotalAccountBalances(int? customerId);
         void CreateAccount(int customerId);
-        void DeleteAccount(int accountId);
+        bool DeleteAccount(int accountId);
     }
 }
