@@ -299,7 +299,7 @@ namespace IsBanken.ConsoleApp
             Console.WriteLine("* Sök kund *");
             Console.Write("Ange namn eller postort: ");
 
-            var term = Console.ReadLine();
+            var term = Console.ReadLine().ToLower();
             var result = _bank.CustomerSearch(term);
 
             if (result.Count > 0)

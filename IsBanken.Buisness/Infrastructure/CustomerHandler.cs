@@ -37,7 +37,7 @@ namespace IsBanken.Buisness.Infrastructure
 
         public Dictionary<int, string> CustomerSearchByNameOrCity(string term)
         {
-            var result = Context.Customers.Where(c => c.CompanyName.Contains(term) || c.City.Contains(term)).ToList();
+            var result = Context.Customers.Where(c => c.CompanyName.ToLower().Contains(term) || c.City.ToLower().Contains(term)).ToList();
 
             var dictionary = result.ToDictionary(c => c.CustomerId, c => c.CompanyName);
 
