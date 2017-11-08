@@ -76,10 +76,13 @@ namespace IsBanken.Tests
         [Fact]
         public void Test_search_customer_by_name_or_city()
         {
-            var searchterm = "Ice";
-            var customer = _bank.CustomerSearch(searchterm);
+            var searchCapitalLetter = "Ice";
+            var searchLowerLetter = "ice";
 
-            Assert.Equal(1, customer.Count);
+            var customerCapital = _bank.CustomerSearch(searchCapitalLetter);
+            var customerLower = _bank.CustomerSearch(searchLowerLetter);
+
+            Assert.Equal(customerCapital.Count, customerLower.Count);
         }
 
         [Fact]
