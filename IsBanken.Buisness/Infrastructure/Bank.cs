@@ -85,7 +85,6 @@ namespace IsBanken.Buisness.Infrastructure
 
         public void CreateAccount(int customerId)
         {
-            
 
             _accountHandler.CreateAccount(customerId);
         }
@@ -113,6 +112,21 @@ namespace IsBanken.Buisness.Infrastructure
         public bool DeleteCustomerAccount(int accountId)
         {
             return _accountHandler.DeleteAccount(accountId);
+        }
+
+        public TransactionResult AddTransaction(int fromAccountId, int toAccountId, decimal amount)
+        {
+            return _transactionHandler.AddTransaction(toAccountId, fromAccountId, amount);
+        }
+
+        public TransactionResult Deposit(int accoundId, decimal amount)
+        {
+            return _transactionHandler.Deposit(accoundId, amount);
+        }
+
+        public TransactionResult Withdraw(int accountId, decimal amount)
+        {
+            return _transactionHandler.Withdraw(accountId, amount);
         }
     }
 

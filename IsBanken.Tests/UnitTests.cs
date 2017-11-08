@@ -24,6 +24,48 @@ namespace IsBanken.Tests
         }
 
         [Fact]
+        public void Test_Transaction()
+        {
+            var result = _bank.AddTransaction(1, 2, 500);
+
+            Assert.Equal(true, result.Success);
+        }
+
+        [Fact]
+        public void Test_TransactionFail()
+        {
+            var result = _bank.AddTransaction(1, 2, Decimal.MaxValue);
+
+            Assert.Equal(false, result.Success);
+        }
+
+        [Fact]
+        public void Test_Deposit()
+        {
+            var balanceBefore = _bank.GetAccounts().FirstOrDefault(x => x.AccountId == 1).Balance;
+
+            var result = _bank.Deposit(1, 1000);
+
+            var balanceAfter = balanceBefore + 1000;
+
+            Assert.Equal(true, result.Success);
+            Assert.Equal(balanceBefore + 1000, balanceAfter);
+        }
+
+        [Fact]
+        public void Test_WithDraw()
+        {
+            var balanceBefore = _bank.GetAccounts().FirstOrDefault(x => x.AccountId == 1).Balance;
+
+            var result = _bank.Withdraw(1, 1000);
+
+            var balanceAfter = balanceBefore - 1000;
+
+            Assert.Equal(true, result.Success);
+            Assert.Equal(balanceBefore - 1000, balanceAfter);
+        }
+
+        [Fact]
         public void Test_CreateAccount()
         {
             _bank.CreateAccount(1);
