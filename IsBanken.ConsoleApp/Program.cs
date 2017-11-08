@@ -125,7 +125,23 @@ namespace IsBanken.ConsoleApp
 
         private static void DeleteAccount()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("* Ta bort konto *");
+            Console.Write("Ange kontonr: ");
+
+            var input = Console.ReadLine();
+            Console.WriteLine();
+
+            var inputParsedResult = int.TryParse(input, out int accountId);
+            if (inputParsedResult)
+            {
+                var result = _bank.DeleteCustomerAccount(accountId);
+
+                Console.WriteLine(result ? $"Konto {accountId} borttaget" : "Kontot kan inte tas bort");
+            }
+            else
+            {
+                Console.WriteLine("Ange ett kontonr");
+            }
         }
 
         private static void CreateAccount()
@@ -156,7 +172,23 @@ namespace IsBanken.ConsoleApp
 
         private static void DeleteCustomer()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("* Ta bort kund *");
+            Console.Write("Ange kundnr: ");
+
+            var input = Console.ReadLine();
+            Console.WriteLine();
+
+            var inputParsedResult = int.TryParse(input, out int customerId);
+            if (inputParsedResult)
+            {
+                var result = _bank.DeleteCustomer(customerId);
+
+                Console.WriteLine(result ? $"Kund {customerId} borttagen" : "Kunden kan inte tas bort");
+            }
+            else
+            {
+                Console.WriteLine("Ange kundnr");
+            }
         }
 
         private static void CreateCustomer()
@@ -300,6 +332,8 @@ namespace IsBanken.ConsoleApp
             Console.Write("Ange namn eller postort: ");
 
             var term = Console.ReadLine().ToLower();
+            Console.WriteLine();
+
             var result = _bank.CustomerSearch(term);
 
             if (result.Count > 0)
