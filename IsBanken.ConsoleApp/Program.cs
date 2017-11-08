@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using IsBanken.Buisness.Models;
+using System.Globalization;
 
 namespace IsBanken.ConsoleApp
 {
@@ -127,7 +128,7 @@ namespace IsBanken.ConsoleApp
             {
                 Console.WriteLine("Ange från kontonummer: ");
                 var inputFromAccountId = Console.ReadLine();
-
+                
                 var parsedSucced = int.TryParse(inputFromAccountId, out fromAccountId);
 
                 if (parsedSucced)
@@ -165,8 +166,9 @@ namespace IsBanken.ConsoleApp
             {
                 Console.WriteLine("Ange belopp: ");
                 var inputAmount = Console.ReadLine();
+                var amountReplace = inputAmount.Replace(".", ",");
 
-                var parsedSucced = decimal.TryParse(inputAmount, out amount);
+                var parsedSucced = decimal.TryParse(amountReplace, NumberStyles.Currency, new CultureInfo("sv-SE"), out amount);
 
                 if (parsedSucced)
                 {
@@ -207,8 +209,9 @@ namespace IsBanken.ConsoleApp
             {
                 Console.WriteLine("Ange belopp: ");
                 var amountInput = Console.ReadLine();
+                var amountReplace = amountInput.Replace(".", ",");
 
-                var parsedSucced = decimal.TryParse(amountInput, out amount);
+                var parsedSucced = decimal.TryParse(amountReplace, NumberStyles.Currency, new CultureInfo("sv-SE"), out amount);
 
                 if (parsedSucced)
                 {
@@ -216,7 +219,7 @@ namespace IsBanken.ConsoleApp
                 }
             }
 
-            var withdrawResult = _bank.Deposit(accountId, amount);
+            var withdrawResult = _bank.Withdraw(accountId, amount);
 
             Console.WriteLine(withdrawResult.Success ? "Uttag genomförd!" : withdrawResult.ErrorMessage);
         }
@@ -229,7 +232,7 @@ namespace IsBanken.ConsoleApp
             while (true)
             {
                 Console.WriteLine("Ange kontonummer: ");
-                var accountInput = Console.ReadLine();
+                var accountInput = Console.ReadLine();                
 
                 var parsedSucced = int.TryParse(accountInput, out accountId);
 
@@ -250,7 +253,9 @@ namespace IsBanken.ConsoleApp
                 Console.WriteLine("Ange belopp: ");
                 var amountInput = Console.ReadLine();
 
-                var parsedSucced = decimal.TryParse(amountInput, out amount);
+                var amountReplace = amountInput.Replace(".", ",");
+
+                var parsedSucced = decimal.TryParse(amountReplace, NumberStyles.Currency, new CultureInfo("sv-SE"), out amount);
 
                 if (parsedSucced)
                 {

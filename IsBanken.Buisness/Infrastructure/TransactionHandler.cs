@@ -84,6 +84,14 @@ namespace IsBanken.Buisness.Infrastructure
                 return transactionResult;
             }
 
+            if(toAccount.Balance < amount)
+            {
+                transactionResult.Success = false;
+                transactionResult.ErrorMessage = $"Överstiger saldo. Kontonummer: {accountId}, Nuvarande saldo: {toAccount.Balance}";
+                return transactionResult;
+            }
+
+
             toAccount.Balance -= amount;
             transactionResult.Success = true;
 
